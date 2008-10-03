@@ -1,0 +1,10 @@
+#summary Developer Express, number one .net components
+
+= Introduction =
+
+.Net controls and more
+
+
+= Details =
+
+Visit [http://devexpress.com/ DevExpress] for the best .net controls around.
