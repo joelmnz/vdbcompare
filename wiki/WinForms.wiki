@@ -1,0 +1,10 @@
+#summary WinForms subscription is called DXperience
+
+= Introduction =
+
+Min requirement is DXperience for WinForms or above
+
+
+= Details =
+
+Link to [http://devexpress.com/Products/NET/DXperience/editionWinForms.xml DevExpress DXperience]
