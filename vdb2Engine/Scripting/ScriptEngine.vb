@@ -773,7 +773,35 @@ Public Class vdbScriptEngine
 
     Next 'table
 
-  End Function
+	End Function
+
+	Public Shared Function GetSchema(ByVal fileName As String) As vDBCompare.ICommon.SchemaDataSet
+		Dim dsSchema As New vDBCompare.ICommon.SchemaDataSet
+		Dim arTables() As String = New String() {}
+
+		Using db As New VistaDB.VistaDBDatabase(fileName, False, True)
+			db.Connect()
+
+			db.EnumTables(arTables)
+
+			For Each tableName As String In arTables
+				Dim t As New VistaDB.VistaDBTable(db, tableName)
+
+				t.Open()
+
+				For Each col As VistaDB.VistaDBColumn In t.Columns
+					dsSchema.TableSchema.AddTableSchemaRow(tableName, col.Name, col.VistaDBType.ToString, _
+					  col.ColumnWidth, col.DefaultValue, col.AllowNull, col.Identity, col.PrimaryKey, col.ColumnDecimals)
+				Next
+
+				t.Close()
+			Next 'table
+			db.Close()
+		End Using
+
+		dsSchema.AcceptChanges()
+		Return dsSchema
+	End Function
 
   Public Shared Function OutPutSchema(ByVal fileName As String, ByVal outputTreeView As TreeView) As Boolean
 

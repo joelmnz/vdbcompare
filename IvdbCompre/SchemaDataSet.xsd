@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="SchemaDataSet" targetNamespace="http://tempuri.org/SchemaDataSet.xsd" xmlns:mstns="http://tempuri.org/SchemaDataSet.xsd" xmlns="http://tempuri.org/SchemaDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="SchemaDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="SchemaDataSet" msprop:Generator_UserDSName="SchemaDataSet" msprop:EnableTableAdapterManager="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="TableSchema" msprop:Generator_UserTableName="TableSchema" msprop:Generator_RowDeletedName="TableSchemaRowDeleted" msprop:Generator_TableClassName="TableSchemaDataTable" msprop:Generator_RowChangedName="TableSchemaRowChanged" msprop:Generator_RowClassName="TableSchemaRow" msprop:Generator_RowChangingName="TableSchemaRowChanging" msprop:Generator_RowEvArgName="TableSchemaRowChangeEvent" msprop:Generator_RowEvHandlerName="TableSchemaRowChangeEventHandler" msprop:Generator_TablePropName="TableSchema" msprop:Generator_TableVarName="tableTableSchema" msprop:Generator_RowDeletingName="TableSchemaRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TableName" msprop:Generator_UserColumnName="TableName" msprop:Generator_ColumnPropNameInRow="TableName" msprop:Generator_ColumnVarNameInTable="columnTableName" msprop:Generator_ColumnPropNameInTable="TableNameColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="ColumnName" msprop:Generator_UserColumnName="ColumnName" msprop:Generator_ColumnPropNameInRow="ColumnName" msprop:Generator_ColumnVarNameInTable="columnColumnName" msprop:Generator_ColumnPropNameInTable="ColumnNameColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="ColumnDataType" msprop:Generator_UserColumnName="ColumnDataType" msprop:Generator_ColumnPropNameInRow="ColumnDataType" msprop:Generator_ColumnVarNameInTable="columnColumnDataType" msprop:Generator_ColumnPropNameInTable="ColumnDataTypeColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="ColumnWidth" msprop:Generator_UserColumnName="ColumnWidth" msprop:Generator_ColumnPropNameInRow="ColumnWidth" msprop:Generator_ColumnVarNameInTable="columnColumnWidth" msprop:Generator_ColumnPropNameInTable="ColumnWidthColumn" type="xs:int" default="0" minOccurs="0" />
+              <xs:element name="ColumnDefault" msprop:Generator_UserColumnName="ColumnDefault" msprop:Generator_ColumnPropNameInRow="ColumnDefault" msprop:Generator_ColumnVarNameInTable="columnColumnDefault" msprop:Generator_ColumnPropNameInTable="ColumnDefaultColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="AllowNull" msprop:Generator_UserColumnName="AllowNull" msprop:Generator_ColumnPropNameInRow="AllowNull" msprop:Generator_ColumnVarNameInTable="columnAllowNull" msprop:Generator_ColumnPropNameInTable="AllowNullColumn" type="xs:boolean" minOccurs="0" />
+              <xs:element name="IsIdentity" msprop:Generator_UserColumnName="IsIdentity" msprop:Generator_ColumnPropNameInRow="IsIdentity" msprop:Generator_ColumnVarNameInTable="columnIsIdentity" msprop:Generator_ColumnPropNameInTable="IsIdentityColumn" type="xs:boolean" minOccurs="0" />
+              <xs:element name="IsPrimaryKey" msprop:Generator_UserColumnName="IsPrimaryKey" msprop:Generator_ColumnPropNameInRow="IsPrimaryKey" msprop:Generator_ColumnVarNameInTable="columnIsPrimaryKey" msprop:Generator_ColumnPropNameInTable="IsPrimaryKeyColumn" type="xs:boolean" minOccurs="0" />
+              <xs:element name="ColumnDecimalPlaces" msprop:Generator_UserColumnName="ColumnDecimalPlaces" msprop:Generator_ColumnPropNameInRow="ColumnDecimalPlaces" msprop:Generator_ColumnVarNameInTable="columnColumnDecimalPlaces" msprop:Generator_ColumnPropNameInTable="ColumnDecimalPlacesColumn" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
