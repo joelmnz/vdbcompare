@@ -121,9 +121,9 @@ Public Class AccessDBGen
     End Function
 
 
-    Public Function ConvertToAccess(ByVal vistaDatabase As String, ByVal accessDatabase As String, ByVal schemaOnly As Boolean)
-        Return ConvertToAccess(vistaDatabase, accessDatabase, schemaOnly, "")
-    End Function
+	Public Function ConvertToAccess(ByVal vistaDatabase As String, ByVal accessDatabase As String, ByVal schemaOnly As Boolean) As Boolean
+		Return ConvertToAccess(vistaDatabase, accessDatabase, schemaOnly, "")
+	End Function
 
     'Public Function ConvertToAccessADOX(ByVal vistaDatabase As String, ByVal accessDatabase As String, ByVal schemaOnly As Boolean, ByVal tablePrefix As String) As Boolean
 

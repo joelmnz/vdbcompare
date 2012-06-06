@@ -142,9 +142,9 @@ Public Class TextScripter
     Return "Identity Column : " & columnName
   End Function
 
-  Public Function CSetDefault(ByVal columnName As String, ByVal defaultValue As String, ByVal useInUpdates As Boolean) As Object Implements ICommon.IScripter.CSetDefault
-    Return "Default: " & columnName & " = " & defaultValue
-  End Function
+	Public Function CSetDefault(ByVal columnName As String, ByVal defaultValue As String, ByVal useInUpdates As Boolean) As String Implements ICommon.IScripter.CSetDefault
+		Return "Default: " & columnName & " = " & defaultValue
+	End Function
 
   Public Function CIsIndexExists(ByVal indexName As String) As String Implements ICommon.IScripter.CIsIndexExists
     Return ""

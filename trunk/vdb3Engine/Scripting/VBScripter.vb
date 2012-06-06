@@ -299,10 +299,10 @@ Public Class VBScripter
     Return String.Format(SET_IDENTITY, columnName, identityValue, identityStep)
   End Function
 
-  Public Function CSetDefault(ByVal columnName As String, ByVal defaultValue As String, ByVal useInUpdates As Boolean) As Object Implements ICommon.IScripter.CSetDefault
-    't.CreateDefaultValue("ColumnName", "0", False, Nothing)
-    Return String.Format(SET_DEFAULT, columnName, defaultValue, useInUpdates)
-  End Function
+	Public Function CSetDefault(ByVal columnName As String, ByVal defaultValue As String, ByVal useInUpdates As Boolean) As String Implements ICommon.IScripter.CSetDefault
+		't.CreateDefaultValue("ColumnName", "0", False, Nothing)
+		Return String.Format(SET_DEFAULT, columnName, defaultValue, useInUpdates)
+	End Function
 
   Public Function CIsIndexExists(ByVal indexName As String) As String Implements ICommon.IScripter.CIsIndexExists
     Return String.Format(IS_INDEX_EXISTS, indexName)

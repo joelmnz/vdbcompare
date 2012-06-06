@@ -194,7 +194,7 @@ Public Class FieldDiff
             If identityInfo IsNot Nothing Then
                 .Identity = True
                 .IdentityValue = identityInfo.SeedValue
-                .IdentityStep = identityInfo.StepExpression
+				.IdentityStep = CDbl(identityInfo.StepExpression)
                 'initial value ?
             End If
 

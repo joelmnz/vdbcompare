@@ -4,1032 +4,1184 @@ Imports System.Windows.Forms
 Public Class vdbScriptEngine
 
 #Region "  VB.NET Script  "
-  'ToDo: write ScriptToVB for vdb3
-  Public Shared Function ScriptToVB(ByVal dbFile As String) As String
+	'ToDo: write ScriptToVB for vdb3
+	Public Shared Function ScriptToVB(ByVal dbFile As String) As String
 
-    Return GenerateCreateDatabaseScript(dbFile, ICommon.ScriptLanguageEnum.VbNet)
+		Return GenerateCreateDatabaseScript(dbFile, ICommon.ScriptLanguageEnum.VbNet)
 
-    'Return "VistaDB 3 script undergoing overhaul, will be back soon, contact support to give us a hurry up."
-    '    Dim sb As System.Text.StringBuilder
+		'Return "VistaDB 3 script undergoing overhaul, will be back soon, contact support to give us a hurry up."
+		'    Dim sb As System.Text.StringBuilder
 
-    '    Dim db As VistaDBDatabase
-    '    Dim t As VistaDBTable
-    '    'Dim c As VistaDB.VistaDBColumn
-    '    Dim tables() As String = Nothing
-    '    Dim indexes() As String = Nothing
-    '    Dim tableName As String
-    '    Dim indexInfo As VistaDB.RTagInfo = Nothing
+		'    Dim db As VistaDBDatabase
+		'    Dim t As VistaDBTable
+		'    'Dim c As VistaDB.VistaDBColumn
+		'    Dim tables() As String = Nothing
+		'    Dim indexes() As String = Nothing
+		'    Dim tableName As String
+		'    Dim indexInfo As VistaDB.RTagInfo = Nothing
 
-    '    If dbFile = "" Then Return "No Database File Supplied!"
+		'    If dbFile = "" Then Return "No Database File Supplied!"
 
-    '    db = New VistaDBDatabase(dbFile, False, True)
-
-
-    '    If Not db.Connect Then
-    '        db.Dispose()
-    '        db = Nothing
-    '        Return "Unable to connect to database!"
-    '    End If
-
-    '    tables = Nothing
-    '    db.EnumTables(tables)
-
-    '    If tables Is Nothing Then
-    '        Return "The Database '" & dbFile & "' Contains no tables."
-    '    End If
-
-    '    sb = New System.Text.StringBuilder
-
-    '    'create basic script output objects
-    '    With sb
-    '        .Append("'// Auto Generated script by vDBCompare (Meikle Programming)")
-    '        .Append(vbCrLf)
-    '        .Append("'// Generated At: ")
-    '        .Append(Now.ToLongDateString)
-    '        .Append(" ")
-    '        .Append(Now.ToLongTimeString)
-    '        .Append(vbCrLf)
-    '        '.Append("'// 25-Sep-06: Scripting Engine still under construction, this will not be the entire script!!! (only missing tables are scripted for now.")
-    '        .Append("'// ")
-    '        .Append(Now.ToString("d-MMM-yy H:mm tt"))
-    '        .Append(" : Scripting Entire code needed to Create New Database")
-    '        .Append(vbCrLf)
-    '        .Append(vbCrLf)
-    '        .Append("Dim db as VistaDB.VistaDBDatabase")
-    '        .Append(vbCrLf)
-    '        .Append("Dim t As VistaDB.VistaDBTable")
-    '        .Append(vbCrLf)
-    '        .Append(vbCrLf)
-    '        .Append("db = New VistaDB.VistaDBDatabase(""")
-    '        .Append(dbFile)
-    '        .Append(""", True, False)")
-    '        .Append(vbCrLf)
-    '        .Append(vbCrLf)
-    '        .Append(vbCrLf)
-    '        .Append(vbCrLf)
-
-    '    End With
-
-    '    If Not tables Is Nothing Then
-    '        For Each tableName In tables
-
-    '            'reset stuff
-    '            t = New VistaDB.VistaDBTable(db, tableName)
-    '            t.Open()
-
-    '            sb.Append(vdbScriptEngine.ScriptTable(t))
-
-    '            'close tables as we go (if necessary)
-    '            If Not t Is Nothing Then
-    '                If t.Opened Then t.Close()
-    '                t = Nothing
-    '            End If
+		'    db = New VistaDBDatabase(dbFile, False, True)
 
 
-    '        Next 'table
-    '    End If
+		'    If Not db.Connect Then
+		'        db.Dispose()
+		'        db = Nothing
+		'        Return "Unable to connect to database!"
+		'    End If
+
+		'    tables = Nothing
+		'    db.EnumTables(tables)
+
+		'    If tables Is Nothing Then
+		'        Return "The Database '" & dbFile & "' Contains no tables."
+		'    End If
+
+		'    sb = New System.Text.StringBuilder
+
+		'    'create basic script output objects
+		'    With sb
+		'        .Append("'// Auto Generated script by vDBCompare (Meikle Programming)")
+		'        .Append(vbCrLf)
+		'        .Append("'// Generated At: ")
+		'        .Append(Now.ToLongDateString)
+		'        .Append(" ")
+		'        .Append(Now.ToLongTimeString)
+		'        .Append(vbCrLf)
+		'        '.Append("'// 25-Sep-06: Scripting Engine still under construction, this will not be the entire script!!! (only missing tables are scripted for now.")
+		'        .Append("'// ")
+		'        .Append(Now.ToString("d-MMM-yy H:mm tt"))
+		'        .Append(" : Scripting Entire code needed to Create New Database")
+		'        .Append(vbCrLf)
+		'        .Append(vbCrLf)
+		'        .Append("Dim db as VistaDB.VistaDBDatabase")
+		'        .Append(vbCrLf)
+		'        .Append("Dim t As VistaDB.VistaDBTable")
+		'        .Append(vbCrLf)
+		'        .Append(vbCrLf)
+		'        .Append("db = New VistaDB.VistaDBDatabase(""")
+		'        .Append(dbFile)
+		'        .Append(""", True, False)")
+		'        .Append(vbCrLf)
+		'        .Append(vbCrLf)
+		'        .Append(vbCrLf)
+		'        .Append(vbCrLf)
+
+		'    End With
+
+		'    If Not tables Is Nothing Then
+		'        For Each tableName In tables
+
+		'            'reset stuff
+		'            t = New VistaDB.VistaDBTable(db, tableName)
+		'            t.Open()
+
+		'            sb.Append(vdbScriptEngine.ScriptTable(t))
+
+		'            'close tables as we go (if necessary)
+		'            If Not t Is Nothing Then
+		'                If t.Opened Then t.Close()
+		'                t = Nothing
+		'            End If
 
 
-    '    'clean up
-    '    If db.Connected Then db.Close()
-
-    '    db.Dispose()
-
-    '    db = Nothing
+		'        Next 'table
+		'    End If
 
 
-    '    Return sb.ToString
+		'    'clean up
+		'    If db.Connected Then db.Close()
 
-    'End Function
+		'    db.Dispose()
 
-    'Public Shared Function ScriptTable(ByVal t As VistaDBTable) As String
-    '    If t Is Nothing Then Return ""
-
-    '    Dim sb As New System.Text.StringBuilder
-    '    Dim tableName As String = t.TableName
-    '    Dim c As VistaDB.VistaDBColumn = Nothing
-    '    Dim indexes() As String
-    '    Dim sIndex As String
-    '    Dim indexInfo As VistaDB.RTagInfo
-
-    '    indexInfo.cpKeyExpr = ""
+		'    db = Nothing
 
 
-    '    With sb
-    '        .Append("'======================================================")
-    '        .Append(vbCrLf)
-    '        .Append("'// Create Table [" & tableName & "]")
-    '        .Append(vbCrLf)
-    '        .Append("'// Safety checks...")
-    '        .Append(vbCrLf)
-    '        .Append("If Not db.IsTableExist(""")
-    '        .Append(tableName)
-    '        .Append(""") Then")
+		'    Return sb.ToString
 
-    '        .Append(vbCrLf)
-    '        .Append("t = New VistaDBTable(db, """ & tableName & """)")
-    '        .Append(vbCrLf)
-    '        .Append("t.TableName = """ & tableName & """")
-    '        .Append(vbCrLf)
-    '        .Append("t.CreateNew()")
-    '        .Append(vbCrLf)
+		'End Function
+
+		'Public Shared Function ScriptTable(ByVal t As VistaDBTable) As String
+		'    If t Is Nothing Then Return ""
+
+		'    Dim sb As New System.Text.StringBuilder
+		'    Dim tableName As String = t.TableName
+		'    Dim c As VistaDB.VistaDBColumn = Nothing
+		'    Dim indexes() As String
+		'    Dim sIndex As String
+		'    Dim indexInfo As VistaDB.RTagInfo
+
+		'    indexInfo.cpKeyExpr = ""
 
 
-    '        For Each c In t.Columns
+		'    With sb
+		'        .Append("'======================================================")
+		'        .Append(vbCrLf)
+		'        .Append("'// Create Table [" & tableName & "]")
+		'        .Append(vbCrLf)
+		'        .Append("'// Safety checks...")
+		'        .Append(vbCrLf)
+		'        .Append("If Not db.IsTableExist(""")
+		'        .Append(tableName)
+		'        .Append(""") Then")
 
-    '            If c.PrimaryKey Then
-    '                .Append("'// Primary Key Field")
-    '                .Append(vbCrLf)
-    '            End If
-    '            If c.Identity Then
-    '                .Append("'// Identity Column")
-    '                .Append(vbCrLf)
-    '            End If
-
-    '            .Append("t.CreateColumn(""")
-    '            .Append(c.Name)
-    '            .Append(""", VistaDBType.")
-    '            .Append(c.VistaDBType.ToString)
-    '            .Append(", ")
-    '            .Append(c.ColumnWidth)
-    '            .Append(", ")
-    '            .Append(c.ColumnDecimals)
-    '            .Append(", ")
-    '            .Append(Not c.AllowNull)
-    '            .Append(", ")
-    '            .Append("False, False, False, False, False)")
-
-    '            .Append(vbCrLf)
-    '            'Next 'field 
-    '        Next
-
-    '        .Append(vbCrLf)
-    '        .Append("t.CreateFinalize()")
-    '        .Append(vbCrLf)
-    '        .Append(vbCrLf)
-
-    '        .Append("'Create Primary Key(s) & auto Identities...")
-    '        .Append(vbCrLf)
-    '        .Append("If Not t.Opened Then t.Open()")
-    '        .Append(vbCrLf)
-
-    '        'auto id's first
-    '        For Each c In t.Columns
-    '            If c.Identity Then
-    '                't.SetIdentity("OID", "1", 1)
-    '                .Append("'// Auto Id")
-    '                .Append(vbCrLf)
-    '                .Append("t.SetIdentity(""")
-    '                .Append(c.Name)
-    '                .Append(""", ""1"", 1)")
-    '                .Append(vbCrLf)
-    '            End If
-    '        Next
-
-    '        indexes = Nothing
-    '        t.EnumIndexes(indexes)
-
-    '        If Not indexes Is Nothing Then
-    '            For Each sIndex In indexes
-
-    '                If t.GetIndex(sIndex, indexInfo.bActive, indexInfo.iOrderIndex, indexInfo.bUnique, indexInfo.bPrimary, indexInfo.bDesc, indexInfo.cpKeyExpr, indexInfo.bFts) Then
-    '                    .Append("'// Index: ")
-    '                    .Append(sIndex)
-    '                    .Append(vbCrLf)
-
-    '                    .Append("t.CreateIndex(""")
-    '                    .Append(sIndex)
-    '                    .Append(""", """)
-    '                    .Append(indexInfo.cpKeyExpr)
-    '                    If indexInfo.bPrimary Then
-    '                        .Append(""", VistaDB.VDBIndexOption.Primary, ")
-    '                    ElseIf indexInfo.bUnique Then
-    '                        .Append(""", VistaDB.VDBIndexOption.Unique, ")
-    '                    ElseIf indexInfo.bStandardIndex Then
-    '                        .Append(""", VistaDB.VDBIndexOption.Standard, ")
-    '                    End If
-
-    '                    .Append(indexInfo.bDesc.ToString)
-    '                    .Append(", ")
-    '                    .Append(indexInfo.ulLocaleId)
-    '                    .Append(")")
-    '                    .Append(vbCrLf)
-    '                End If
-
-    '            Next
-    '        End If
-
-    '        '// Clean up
-    '        .Append(vbCrLf)
-    '        .Append("'// Clean Up")
-    '        .Append(vbCrLf)
-    '        .Append("If t.Opened Then t.Close()")
-    '        .Append(vbCrLf)
-    '        .Append("t = Nothing")
+		'        .Append(vbCrLf)
+		'        .Append("t = New VistaDBTable(db, """ & tableName & """)")
+		'        .Append(vbCrLf)
+		'        .Append("t.TableName = """ & tableName & """")
+		'        .Append(vbCrLf)
+		'        .Append("t.CreateNew()")
+		'        .Append(vbCrLf)
 
 
-    '        .Append(vbCrLf)
-    '        .Append(vbCrLf)
+		'        For Each c In t.Columns
 
-    '        .Append("End If")
-    '        .Append(vbCrLf)
-    '        .Append(vbCrLf)
-    '    End With
+		'            If c.PrimaryKey Then
+		'                .Append("'// Primary Key Field")
+		'                .Append(vbCrLf)
+		'            End If
+		'            If c.Identity Then
+		'                .Append("'// Identity Column")
+		'                .Append(vbCrLf)
+		'            End If
 
-    '    Return sb.ToString
-    Return ""
-  End Function
+		'            .Append("t.CreateColumn(""")
+		'            .Append(c.Name)
+		'            .Append(""", VistaDBType.")
+		'            .Append(c.VistaDBType.ToString)
+		'            .Append(", ")
+		'            .Append(c.ColumnWidth)
+		'            .Append(", ")
+		'            .Append(c.ColumnDecimals)
+		'            .Append(", ")
+		'            .Append(Not c.AllowNull)
+		'            .Append(", ")
+		'            .Append("False, False, False, False, False)")
+
+		'            .Append(vbCrLf)
+		'            'Next 'field 
+		'        Next
+
+		'        .Append(vbCrLf)
+		'        .Append("t.CreateFinalize()")
+		'        .Append(vbCrLf)
+		'        .Append(vbCrLf)
+
+		'        .Append("'Create Primary Key(s) & auto Identities...")
+		'        .Append(vbCrLf)
+		'        .Append("If Not t.Opened Then t.Open()")
+		'        .Append(vbCrLf)
+
+		'        'auto id's first
+		'        For Each c In t.Columns
+		'            If c.Identity Then
+		'                't.SetIdentity("OID", "1", 1)
+		'                .Append("'// Auto Id")
+		'                .Append(vbCrLf)
+		'                .Append("t.SetIdentity(""")
+		'                .Append(c.Name)
+		'                .Append(""", ""1"", 1)")
+		'                .Append(vbCrLf)
+		'            End If
+		'        Next
+
+		'        indexes = Nothing
+		'        t.EnumIndexes(indexes)
+
+		'        If Not indexes Is Nothing Then
+		'            For Each sIndex In indexes
+
+		'                If t.GetIndex(sIndex, indexInfo.bActive, indexInfo.iOrderIndex, indexInfo.bUnique, indexInfo.bPrimary, indexInfo.bDesc, indexInfo.cpKeyExpr, indexInfo.bFts) Then
+		'                    .Append("'// Index: ")
+		'                    .Append(sIndex)
+		'                    .Append(vbCrLf)
+
+		'                    .Append("t.CreateIndex(""")
+		'                    .Append(sIndex)
+		'                    .Append(""", """)
+		'                    .Append(indexInfo.cpKeyExpr)
+		'                    If indexInfo.bPrimary Then
+		'                        .Append(""", VistaDB.VDBIndexOption.Primary, ")
+		'                    ElseIf indexInfo.bUnique Then
+		'                        .Append(""", VistaDB.VDBIndexOption.Unique, ")
+		'                    ElseIf indexInfo.bStandardIndex Then
+		'                        .Append(""", VistaDB.VDBIndexOption.Standard, ")
+		'                    End If
+
+		'                    .Append(indexInfo.bDesc.ToString)
+		'                    .Append(", ")
+		'                    .Append(indexInfo.ulLocaleId)
+		'                    .Append(")")
+		'                    .Append(vbCrLf)
+		'                End If
+
+		'            Next
+		'        End If
+
+		'        '// Clean up
+		'        .Append(vbCrLf)
+		'        .Append("'// Clean Up")
+		'        .Append(vbCrLf)
+		'        .Append("If t.Opened Then t.Close()")
+		'        .Append(vbCrLf)
+		'        .Append("t = Nothing")
+
+
+		'        .Append(vbCrLf)
+		'        .Append(vbCrLf)
+
+		'        .Append("End If")
+		'        .Append(vbCrLf)
+		'        .Append(vbCrLf)
+		'    End With
+
+		'    Return sb.ToString
+		Return ""
+	End Function
 
 #End Region
 
+	Public Shared Function OutPutDiff(ByVal scheam1 As vDBCompare.ICommon.SchemaDataSet, ByVal schema2 As vDBCompare.ICommon.SchemaDataSet, ByVal outputTreeView As TreeView) As Boolean
+		outputTreeView.Nodes.Clear()
 
 
-  Public Shared Function OutPutDiff(ByVal differences As DbDiff, ByVal outputTreeView As TreeView) As Boolean
-    If differences Is Nothing Then Return True 'no differences?
-    If outputTreeView Is Nothing Then Return False
+		Dim qryTables = From row In scheam1.TableSchema Select row.TableName Distinct
+		Dim diffTableNode As TreeNode = Nothing
+		Dim diffFieldNode As TreeNode = Nothing
+		Dim loFieldName As String = String.Empty
 
-    Dim diffTableNode, diffFieldNode As TreeNode
-    Dim loFieldName As String
+		For Each tableName As String In qryTables
 
-    'clear output first
-    outputTreeView.Nodes.Clear()
+			Dim szTableName As String = tableName 'to stop compiler complaining
+			Dim qryT1Columns = From row In scheam1.TableSchema Select row Where row.TableName = szTableName
+			Dim qryT2Columns = From row In schema2.TableSchema Select row Where row.TableName = szTableName
 
-    diffTableNode = Nothing
-    diffFieldNode = Nothing
+			If schema2.TableSchema.Any(Function(row) row.TableName = szTableName) Then
+				'exists, compare fields
 
+				diffTableNode = outputTreeView.Nodes.Add(szTableName)
+				diffTableNode.ImageIndex = vDBCompare.ICommon.Common.TICON_TABLE
 
-    For Each t As TableDiff In differences.Tables.Values
-      Select Case t.DiffAction
-        Case ICommon.DiffActionTypeEnum.Add
-          't.TableName
-          diffTableNode = outputTreeView.Nodes.Add(t.TableName & " [ADD]")
-          diffTableNode.ImageIndex = vDBCompare.ICommon.Common.TICON_TABLE_ADD
+				'columns.. should be either alter,add or drop
 
-          For Each f As FieldDiff In t.Fields.Values
-            If f.DiffAction = ICommon.DiffActionTypeEnum.Add Then
-              loFieldName = "+ " & f.Name
-              If f.PrimaryKey Then loFieldName &= " (PK)"
-              If f.Identity Then loFieldName &= " (Auto)"
+				For Each colRow In qryT1Columns
 
+					loFieldName = colRow.ColumnName
+					Dim col2Row = qryT2Columns.FirstOrDefault(Function(c2Col) c2Col.ColumnName = loFieldName)
 
-              diffFieldNode = diffTableNode.Nodes.Add(loFieldName)
-              diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD_ADD
+					If colRow.IsPrimaryKey Then loFieldName &= " (PK)"
+					If colRow.IsIdentity Then loFieldName &= " (Auto)"
 
-              diffFieldNode.Nodes.Add(f.DataType.ToString & " (" & _
-                  Microsoft.VisualBasic.IIf(f.Required, "NOT NULL", "NULL") & ")")
+					If col2Row IsNot Nothing Then
+						'exists, check data types & len etc
+						'If colRow.ColumnWidth = colRow.ColumnWidth AndAlso colRow.ColumnDataType = col2Row.ColumnDataType Then Continue For
+						'### 6/06/2012 : currently the data types dont match so dont compare those
+						If colRow.ColumnWidth = colRow.ColumnWidth Then Continue For
 
-              'sizes
-              If f.Decimals <> 0 Then
-                diffFieldNode.Nodes.Add("Size= " & f.Width.ToString & "," & f.Decimals.ToString)
-              Else
-                diffFieldNode.Nodes.Add("Size= " & f.Width.ToString)
-              End If
+						loFieldName &= " [ALTER]"
+						diffFieldNode = diffTableNode.Nodes.Add(loFieldName)
+						diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD_ALTER
+					Else
+						'Add
+						loFieldName = loFieldName & " [ADD]"
+						diffFieldNode = diffTableNode.Nodes.Add(loFieldName)
+						diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD_ADD
+					End If
 
-              If f.DefaultValue <> "" Then diffFieldNode.Nodes.Add("Default=" & f.DefaultValue)
 
+					diffFieldNode.Nodes.Add(colRow.ColumnDataType & " (" & _
+					 CStr(Microsoft.VisualBasic.IIf(colRow.AllowNull, "NOT NULL", "NULL")) & ")")
 
+					'sizes
+					If colRow.ColumnDecimalPlaces <> 0 Then
+						diffFieldNode.Nodes.Add("Size= " & colRow.ColumnWidth.ToString & "," & colRow.ColumnDecimalPlaces.ToString)
+					Else
+						diffFieldNode.Nodes.Add("Size= " & colRow.ColumnWidth.ToString)
+					End If
 
-            Else
-              diffFieldNode = diffTableNode.Nodes.Add(f.Name & " (# invalid action for column, should be 'Add')")
-              diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD
-              'sb.AppendLine(lang.CComment("# Invalid action for column [" & f.Name & "]"))
-            End If 'all other actions should be INVALID in this context!
-          Next
+					If colRow.ColumnDefault <> "" Then diffFieldNode.Nodes.Add("Default=" & colRow.ColumnDefault)
 
+				Next
 
-          'Indexes? may do later
-          'If processIndexes Then
-          For Each idx As IndexDiff In t.Indexs
-            diffFieldNode = diffTableNode.Nodes.Add("INDEX : " & idx.Name & " (" & idx.KeyExpr & ", " & Microsoft.VisualBasic.IIf(idx.Primary, "PK", "Normal Index") & ")")
-            diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD 'index?
-          Next
-          'End If
+				'Indexes
+				'For Each idx As IndexDiff In t.Indexs
+				'	diffFieldNode = diffTableNode.Nodes.Add("INDEX : " & idx.Name & " (" & idx.KeyExpr & ", " & CStr(Microsoft.VisualBasic.IIf(idx.Primary, "PK", "Normal Index")) & ")")
+				'	diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD 'index?
+				'Next
 
-        Case ICommon.DiffActionTypeEnum.Alter ' -> moved to Else
-          If t.HasChanges Then
 
-            diffTableNode = outputTreeView.Nodes.Add(t.TableName)
-            diffTableNode.ImageIndex = vDBCompare.ICommon.Common.TICON_TABLE
+			Else
+				'not found, add all columns
+				diffTableNode = outputTreeView.Nodes.Add(szTableName & " [ADD]")
+				diffTableNode.ImageIndex = vDBCompare.ICommon.Common.TICON_TABLE_ADD
 
-            If t.HasFieldChanges Then 'as may only contain index changes
+				'need to all all columns for this table
 
-              'columns.. should be either alter,add or drop
+				For Each colRow In qryT1Columns
 
-              For Each f As FieldDiff In t.Fields.Values
 
+					loFieldName = "+ " & colRow.ColumnName
+					If colRow.IsPrimaryKey Then loFieldName &= " (PK)"
+					If colRow.IsIdentity Then loFieldName &= " (Auto)"
 
-                loFieldName = f.Name
-                If f.PrimaryKey Then loFieldName &= " (PK)"
-                If f.Identity Then loFieldName &= " (Auto)"
+					diffFieldNode = diffTableNode.Nodes.Add(loFieldName)
+					diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD_ADD
 
-                Select Case f.DiffAction
-                  Case ICommon.DiffActionTypeEnum.Add
-                    loFieldName = loFieldName & " [ADD]"
+					diffFieldNode.Nodes.Add(colRow.ColumnDataType & " (" & _
+					 CStr(Microsoft.VisualBasic.IIf(colRow.AllowNull, "NOT NULL", "NULL")) & ")")
 
+					'sizes
+					If colRow.ColumnDecimalPlaces <> 0 Then
+						diffFieldNode.Nodes.Add("Size= " & colRow.ColumnWidth.ToString & "," & colRow.ColumnDecimalPlaces.ToString)
+					Else
+						diffFieldNode.Nodes.Add("Size= " & colRow.ColumnWidth.ToString)
+					End If
 
-                    diffFieldNode = diffTableNode.Nodes.Add(loFieldName)
-                    diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD_ADD
+					If colRow.ColumnDefault <> "" Then diffFieldNode.Nodes.Add("Default=" & colRow.ColumnDefault)
 
+				Next 'column
+			End If
+			'hack for not knowing if there is anything changed
+			If diffTableNode IsNot Nothing AndAlso diffTableNode.Nodes.Count = 0 Then outputTreeView.Nodes.Remove(diffTableNode)
 
-                  Case ICommon.DiffActionTypeEnum.Alter
-                    loFieldName &= " [ALTER]"
-                    diffFieldNode = diffTableNode.Nodes.Add(loFieldName)
-                    diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD_ALTER
-                  Case ICommon.DiffActionTypeEnum.Drop
-                    loFieldName = loFieldName & " [DROP]"
-                    diffFieldNode = diffTableNode.Nodes.Add(loFieldName)
-                    diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD_DROP
-                  Case Else
-                    '??
-                    loFieldName &= " [?]"
-                    diffFieldNode = diffTableNode.Nodes.Add(loFieldName)
-                    diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD
-                End Select
+		Next 'table 
 
-                diffFieldNode.Nodes.Add(f.DataType.ToString & " (" & _
-                    Microsoft.VisualBasic.IIf(f.Required, "NOT NULL", "NULL") & ")")
+		Return True
+	End Function
 
-                'sizes
-                If f.Decimals <> 0 Then
-                  diffFieldNode.Nodes.Add("Size= " & f.Width.ToString & "," & f.Decimals.ToString)
-                Else
-                  diffFieldNode.Nodes.Add("Size= " & f.Width.ToString)
-                End If
+	Public Shared Function OutPutDiff(ByVal differences As DbDiff, ByVal outputTreeView As TreeView) As Boolean
+		If differences Is Nothing Then Return True 'no differences?
+		If outputTreeView Is Nothing Then Return False
 
-                If f.DefaultValue <> "" Then diffFieldNode.Nodes.Add("Default=" & f.DefaultValue)
+		Dim diffTableNode, diffFieldNode As TreeNode
+		Dim loFieldName As String
 
+		'clear output first
+		outputTreeView.Nodes.Clear()
 
+		diffTableNode = Nothing
+		diffFieldNode = Nothing
 
-              Next
-            End If
 
+		For Each t As TableDiff In differences.Tables.Values
+			Select Case t.DiffAction
+				Case ICommon.DiffActionTypeEnum.Add
+					't.TableName
+					diffTableNode = outputTreeView.Nodes.Add(t.TableName & " [ADD]")
+					diffTableNode.ImageIndex = vDBCompare.ICommon.Common.TICON_TABLE_ADD
 
-            'Indexes
-            For Each idx As IndexDiff In t.Indexs
-              diffFieldNode = diffTableNode.Nodes.Add("INDEX : " & idx.Name & " (" & idx.KeyExpr & ", " & Microsoft.VisualBasic.IIf(idx.Primary, "PK", "Normal Index") & ")")
-              diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD 'index?
-            Next
+					For Each f As FieldDiff In t.Fields.Values
+						If f.DiffAction = ICommon.DiffActionTypeEnum.Add Then
+							loFieldName = "+ " & f.Name
+							If f.PrimaryKey Then loFieldName &= " (PK)"
+							If f.Identity Then loFieldName &= " (Auto)"
 
 
-          End If
+							diffFieldNode = diffTableNode.Nodes.Add(loFieldName)
+							diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD_ADD
 
+							diffFieldNode.Nodes.Add(f.DataType.ToString & " (" & _
+							 CStr(Microsoft.VisualBasic.IIf(f.Required, "NOT NULL", "NULL")) & ")")
 
-        Case ICommon.DiffActionTypeEnum.Drop
-          diffTableNode = outputTreeView.Nodes.Add("DROP " & t.TableName)
-          diffTableNode.ImageIndex = vDBCompare.ICommon.Common.TICON_TABLE_DROP
-        Case ICommon.DiffActionTypeEnum.None
-          'No changes? just skip for now 
-      End Select
+							'sizes
+							If f.Decimals <> 0 Then
+								diffFieldNode.Nodes.Add("Size= " & f.Width.ToString & "," & f.Decimals.ToString)
+							Else
+								diffFieldNode.Nodes.Add("Size= " & f.Width.ToString)
+							End If
 
-    Next 'table
+							If f.DefaultValue <> "" Then diffFieldNode.Nodes.Add("Default=" & f.DefaultValue)
 
-  End Function
 
 
-  Public Shared Function OutPutSchema(ByVal fileName As String, ByVal outputTreeView As TreeView) As Boolean
-    If fileName = "" Then Return False
-    If outputTreeView Is Nothing Then Return False
+						Else
+							diffFieldNode = diffTableNode.Nodes.Add(f.Name & " (# invalid action for column, should be 'Add')")
+							diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD
+							'sb.AppendLine(lang.CComment("# Invalid action for column [" & f.Name & "]"))
+						End If 'all other actions should be INVALID in this context!
+					Next
 
-    Dim db As DDA.IVistaDBDatabase
-    Dim t As DDA.IVistaDBTableSchema
-    Dim tables As ArrayList = Nothing
-    Dim tableName As String
-    Dim tableNode, fieldNode As TreeNode
 
-    Dim i As Integer
+					'Indexes? may do later
+					'If processIndexes Then
+					For Each idx As IndexDiff In t.Indexs
+						diffFieldNode = diffTableNode.Nodes.Add("INDEX : " & idx.Name & " (" & idx.KeyExpr & ", " & CStr(Microsoft.VisualBasic.IIf(idx.Primary, "PK", "Normal Index")) & ")")
+						diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD 'index?
+					Next
+					'End If
 
-    outputTreeView.Nodes.Clear()
+				Case ICommon.DiffActionTypeEnum.Alter ' -> moved to Else
+					If t.HasChanges Then
 
-    'db = New VistaDB.VistaDBDatabase(fileName, False, True)
-    db = Engine.DDA.OpenDatabase(fileName, VistaDBDatabaseOpenMode.NonexclusiveReadOnly, Nothing)
+						diffTableNode = outputTreeView.Nodes.Add(t.TableName)
+						diffTableNode.ImageIndex = vDBCompare.ICommon.Common.TICON_TABLE
 
-    tables = db.EnumTables()
+						If t.HasFieldChanges Then 'as may only contain index changes
 
-    If Not tables Is Nothing Then
-      outputTreeView.BeginUpdate()
-      For Each tableName In tables
-        tableNode = outputTreeView.Nodes.Add(tableName)
-        tableNode.ImageIndex = vDBCompare.ICommon.Common.TICON_TABLE 'G.TICON_TABLE
-        t = db.TableSchema(tableName)
+							'columns.. should be either alter,add or drop
 
-        For i = 0 To t.ColumnCount - 1
-          fieldNode = tableNode.Nodes.Add(t(i).Name)
-          fieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD
-          fieldNode.Nodes.Add("Type: " & t(i).Type.ToString).ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD_INFO
-          fieldNode.Nodes.Add("Size: " & t(i).MaxLength.ToString).ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD_INFO
-        Next
+							For Each f As FieldDiff In t.Fields.Values
 
-        t.Dispose()
-        t = Nothing
 
-      Next
-      outputTreeView.EndUpdate()
-    End If
+								loFieldName = f.Name
+								If f.PrimaryKey Then loFieldName &= " (PK)"
+								If f.Identity Then loFieldName &= " (Auto)"
 
-    'If db.Connected Then db.Close()
-    If Not db.IsClosed Then db.Close()
-    db.Dispose()
-    db = Nothing
+								Select Case f.DiffAction
+									Case ICommon.DiffActionTypeEnum.Add
+										loFieldName = loFieldName & " [ADD]"
 
-  End Function
 
+										diffFieldNode = diffTableNode.Nodes.Add(loFieldName)
+										diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD_ADD
 
-  'ToDo: write GetDifferences for vdb3
-  Public Shared Function GetDifferences(ByVal vdbFile1 As String, ByVal vdbFile2 As String, ByVal processIndexes As Boolean) As vdb3.DbDiff
 
-    'assuming valid stuff has been passed! (files exists etc..)
+									Case ICommon.DiffActionTypeEnum.Alter
+										loFieldName &= " [ALTER]"
+										diffFieldNode = diffTableNode.Nodes.Add(loFieldName)
+										diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD_ALTER
+									Case ICommon.DiffActionTypeEnum.Drop
+										loFieldName = loFieldName & " [DROP]"
+										diffFieldNode = diffTableNode.Nodes.Add(loFieldName)
+										diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD_DROP
+									Case Else
+										'??
+										loFieldName &= " [?]"
+										diffFieldNode = diffTableNode.Nodes.Add(loFieldName)
+										diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD
+								End Select
 
-    Dim differences As New vdb3.DbDiff
+								diffFieldNode.Nodes.Add(f.DataType.ToString & " (" & _
+								 CStr(Microsoft.VisualBasic.IIf(f.Required, "NOT NULL", "NULL")) & ")")
 
-    Dim db1, db2 As DDA.IVistaDBDatabase
-    'Dim t1 As VistaDB.DDA.IVistaDBTable = Nothing
-    Dim ts1 As VistaDB.DDA.IVistaDBTableSchema = Nothing
-    'Dim t2 As VistaDB.DDA.IVistaDBTable = Nothing
-    Dim ts2 As VistaDB.DDA.IVistaDBTableSchema = Nothing
-    'Dim c As VistaDB.VistaDBColumn
-    Dim c As VistaDB.DDA.IVistaDBColumnAttributes
+								'sizes
+								If f.Decimals <> 0 Then
+									diffFieldNode.Nodes.Add("Size= " & f.Width.ToString & "," & f.Decimals.ToString)
+								Else
+									diffFieldNode.Nodes.Add("Size= " & f.Width.ToString)
+								End If
 
-    Dim tables1 As ArrayList = Nothing
-    Dim tables2 As ArrayList = Nothing
-    'Dim indexes() As String = Nothing
-    Dim tableName As String = ""
-    Dim sIndex As String = ""
-    'Dim indexInfo As VistaDB.RTagInfo
+								If f.DefaultValue <> "" Then diffFieldNode.Nodes.Add("Default=" & f.DefaultValue)
 
-    Dim td As New TableDiff
 
-    'indexInfo.cpKeyExpr = ""
-    'indexInfo.cpForExpr = ""
 
-    'db1 = New VistaDB.VistaDBDatabase(vdbFile1, False, True)
-    db1 = Engine.DDA.OpenDatabase(vdbFile1, VistaDBDatabaseOpenMode.NonexclusiveReadOnly, Nothing)
-    'db2 = New VistaDB.VistaDBDatabase(vdbFile2, False, True)
-    db2 = Engine.DDA.OpenDatabase(vdbFile2, VistaDBDatabaseOpenMode.NonexclusiveReadOnly, Nothing)
+							Next
+						End If
 
-    'If Not db1.Connected Then db1.Connect()
-    'If Not db2.Connected Then db2.Connect()
 
+						'Indexes
+						For Each idx As IndexDiff In t.Indexs
+							diffFieldNode = diffTableNode.Nodes.Add("INDEX : " & idx.Name & " (" & idx.KeyExpr & ", " & CStr(Microsoft.VisualBasic.IIf(idx.Primary, "PK", "Normal Index")) & ")")
+							diffFieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD 'index?
+						Next
 
-    'db1.EnumTables(tables1)
-    tables1 = db1.EnumTables
-    'db2.EnumTables(tables2)
-    tables2 = db2.EnumTables
 
+					End If
 
-    If Not tables1 Is Nothing Then
-      For Each tableName In tables1
 
-        't1 = New VistaDB.VistaDBTable(db1, tableName)
-        't1.Open()
-        ts1 = db1.TableSchema(tableName)
+				Case ICommon.DiffActionTypeEnum.Drop
+					diffTableNode = outputTreeView.Nodes.Add("DROP " & t.TableName)
+					diffTableNode.ImageIndex = vDBCompare.ICommon.Common.TICON_TABLE_DROP
+				Case ICommon.DiffActionTypeEnum.None
+					'No changes? just skip for now 
+			End Select
 
-        'does this table exist in the 2nd db
-        '===========================================================
-        'If db2.IsTableExist(tableName) Then
-        If tables2.Contains(tableName) Then
-          '===========================================================
-          'Checking all fields exist
-          't2 = New VistaDB.VistaDBTable(db2, tableName)
-          't2.Open()
-          ts2 = db2.TableSchema(tableName)
+		Next 'table
 
-          'reset for each table
+	End Function
 
-          td = Nothing
+	Public Shared Function GetSchema(ByVal fileName As String) As vDBCompare.ICommon.SchemaDataSet
+		Dim dsSchema As New vDBCompare.ICommon.SchemaDataSet
 
-          '<<------------------  How to enum table columns ??
+		Using db As VistaDB.DDA.IVistaDBDatabase = vdb3.DDA.OpenDatabase(fileName, VistaDBDatabaseOpenMode.NonexclusiveReadOnly, Nothing)
 
-          For Each c In ts1
-            'check the field exists
-            If Engine.ColumnExists(ts2, c.Name) Then
-              'check data type
-              If c.Type = ts2.Item(c.Name).Type Then
-                'If t1.ColumnType(c.Name) = t2.ColumnType(c.Name) Then
-                'check data length
-                If c.MaxLength <> ts2.Item(c.Name).MaxLength Then
-                  'If c.ColumnWidth <> t2.ColumnWidth(c.Name) Then
+			Dim arTables = db.EnumTables
 
-                  'sizes are different
-                  If td Is Nothing Then
-                    td = New TableDiff(tableName, ICommon.DiffActionTypeEnum.Alter)
-                    differences.Tables.Add(tableName, td)
-                  End If
+			For Each tableName As String In arTables
 
-                  td.Fields.Add(c.Name, New FieldDiff(c, ts1, ICommon.DiffActionTypeEnum.Alter))
-
-                End If
-              Else
-                'different data type
-                If td Is Nothing Then
-                  td = New TableDiff(tableName, ICommon.DiffActionTypeEnum.Alter)
-                  differences.Tables.Add(tableName, td)
-                End If
+				Dim ts As VistaDB.DDA.IVistaDBTableSchema = db.TableSchema(tableName)
+				'Dim t = db.OpenTable(tableName, False, True)
 
-                td.Fields.Add(c.Name, New FieldDiff(c, ts1, ICommon.DiffActionTypeEnum.Alter))
-              End If
-            Else 'column does not exist
-              If td Is Nothing Then
-                td = New TableDiff(tableName, ICommon.DiffActionTypeEnum.Alter)
-                differences.Tables.Add(tableName, td)
-              End If
+				'Dim col As VistaDB.DDA.IVistaDBColumnAttributes = t.Item(columnName)
+				For iColumnIndex As Integer = 0 To ts.ColumnCount - 1
+					Dim col As VistaDB.DDA.IVistaDBColumnAttributes = ts.Item(iColumnIndex)
+					Dim row = dsSchema.TableSchema.AddTableSchemaRow(tableName, col.Name, col.Type.ToString, _
+					 col.MaxLength, String.Empty, col.AllowNull, False, False, 0)
 
-              td.Fields.Add(c.Name, New FieldDiff(c, ts1, ICommon.DiffActionTypeEnum.Add))
-            End If
-          Next
+					row.IsPrimaryKey = IsColumnPrimaryKey(ts, col)
+					row.IsIdentity = IsColumnIdentity(ts, col)
 
+				Next
 
-          'check for fields that may need to be dropped
-          For Each c In ts2
-            If Not Engine.ColumnExists(ts1, c.Name) Then
-              'drop field
-              If td Is Nothing Then
-                td = New TableDiff(tableName, ICommon.DiffActionTypeEnum.Alter)
-                differences.Tables.Add(tableName, td)
-              End If
+			Next 'table
+		End Using
 
-              td.Fields.Add(c.Name, New FieldDiff(c, ts2, ICommon.DiffActionTypeEnum.Drop))
-            End If
-          Next '
+		dsSchema.AcceptChanges()
+		Return dsSchema
+	End Function
 
-          '===========================================================
-        Else 'table doesn't exist
-          '===========================================================
-          '===========================================================
-          'new table
-          td = New TableDiff(tableName, ICommon.DiffActionTypeEnum.Add)
+	Private Shared Function IsColumnPrimaryKey(ByVal ts As VistaDB.DDA.IVistaDBTableSchema, ByVal col As VistaDB.DDA.IVistaDBColumnAttributes) As Boolean
+		If ts.Indexes.Count = 0 Then Return False
+		For Each key In ts.Indexes.Keys
+			Dim ix = ts.Indexes(CStr(key))
+			If ix.KeyExpression = col.Name Then Return True
+		Next
+		Return False
+	End Function
+	Private Shared Function IsColumnIdentity(ByVal ts As VistaDB.DDA.IVistaDBTableSchema, ByVal col As VistaDB.DDA.IVistaDBColumnAttributes) As Boolean
+		If ts.Identities.Count = 0 Then Return False
+		For Each key In ts.Identities.Keys
+			Dim ident = ts.Identities(CStr(key))
+			If ident.ColumnName = col.Name Then Return True
+		Next
+		Return False
+	End Function
 
-          differences.Tables.Add(tableName, td)
+	Public Shared Function OutPutSchema(ByVal fileName As String, ByVal outputTreeView As TreeView) As Boolean
+		If fileName = "" Then Return False
+		If outputTreeView Is Nothing Then Return False
 
-          'adding all fields
-          For Each c In ts1
-            td.Fields.Add(c.Name, New FieldDiff(c, ts1, ICommon.DiffActionTypeEnum.Add))
-            'Next 'field 
-          Next
-        End If 'db2.IsTableExist(tableName)
+		Dim db As DDA.IVistaDBDatabase
+		Dim t As DDA.IVistaDBTableSchema
+		Dim tables As ArrayList = Nothing
+		Dim tableName As String
+		Dim tableNode, fieldNode As TreeNode
 
-        'check for identities
-        'check for PK's
-        'check for Indexes
+		Dim i As Integer
 
-        't1.EnumConstraints ?
-        't1.EnumForeignKeys ?
-        't1.EnumIdentities -> done above
-        't1.EnumIndexes -> done below
-        't1.EnumTriggers ?
+		outputTreeView.Nodes.Clear()
 
-        If processIndexes Then
+		'db = New VistaDB.VistaDBDatabase(fileName, False, True)
+		db = Engine.DDA.OpenDatabase(fileName, VistaDBDatabaseOpenMode.NonexclusiveReadOnly, Nothing)
 
+		tables = db.EnumTables()
 
+		If Not tables Is Nothing Then
+			outputTreeView.BeginUpdate()
+			For Each tableName In tables
+				tableNode = outputTreeView.Nodes.Add(tableName)
+				tableNode.ImageIndex = vDBCompare.ICommon.Common.TICON_TABLE 'G.TICON_TABLE
+				t = db.TableSchema(tableName)
 
-          For Each index As VistaDB.DDA.IVistaDBIndexInformation In ts1.Indexes
+				For i = 0 To t.ColumnCount - 1
+					fieldNode = tableNode.Nodes.Add(t(i).Name)
+					fieldNode.ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD
+					fieldNode.Nodes.Add("Type: " & t(i).Type.ToString).ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD_INFO
+					fieldNode.Nodes.Add("Size: " & t(i).MaxLength.ToString).ImageIndex = vDBCompare.ICommon.Common.TICON_FIELD_INFO
+				Next
 
-            'If t1.GetIndex(sIndex, indexInfo.bActive, indexInfo.iOrderIndex, indexInfo.bUnique, indexInfo.bPrimary, indexInfo.bDesc, indexInfo.cpKeyExpr, indexInfo.bFts, indexInfo.bStandardIndex, indexInfo.cpForExpr) Then
+				t.Dispose()
+				t = Nothing
 
-            'Active doesn't seem to work, leave out for now
-            'If indexInfo.bActive Then
-            If td Is Nothing Then
-              td = New TableDiff(tableName, ICommon.DiffActionTypeEnum.Alter)
-              differences.Tables.Add(tableName, td)
-            End If
+			Next
+			outputTreeView.EndUpdate()
+		End If
 
-            td.Indexs.Add(New IndexDiff(index))
-            'Dim idx As New IndexDiff(index)
-            'With idx
-            '    .Name = sIndex
-            '    'Trace.WriteLine("Index: " & .Name & " = " & indexInfo.cpForExpr)
-            '    .KeyExpr = index.KeyExpression ' indexInfo.cpKeyExpr
-            '    .Descending = False ' indexInfo.bDesc
+		'If db.Connected Then db.Close()
+		If Not db.IsClosed Then db.Close()
+		db.Dispose()
+		db = Nothing
 
-            '    If index.Primary Then
-            '        .IndexType = VDBIndexOption.Primary
-            '    ElseIf indexInfo.bUnique Then
-            '        .IndexType = VDBIndexOption.Unique
-            '    ElseIf indexInfo.bStandardIndex Then
-            '        .IndexType = VDBIndexOption.Standard
-            '    ElseIf indexInfo.bFts Then
-            '        'not sure what it is but don't think its every used.
-            '        .IndexType = VDBIndexOption.FTS
-            '    Else
-            '        'normal? what is that?
-            '        .IndexType = VDBIndexOption.Standard
-            '    End If
-            'End With
-            ''.Append(indexInfo.ulLocaleId)
-            'td.Indexs.Add(idx)
-            'End If
-            'End If
+	End Function
 
-          Next
 
-        End If 'processIndexes
+	'ToDo: write GetDifferences for vdb3
+	Public Shared Function GetDifferences(ByVal vdbFile1 As String, ByVal vdbFile2 As String, ByVal processIndexes As Boolean) As vdb3.DbDiff
 
+		'assuming valid stuff has been passed! (files exists etc..)
 
-      Next 'tableName
-    End If 'tables1 Is Nothing
+		Dim differences As New vdb3.DbDiff
 
-    ''need to close databases
+		Dim db1, db2 As DDA.IVistaDBDatabase
+		'Dim t1 As VistaDB.DDA.IVistaDBTable = Nothing
+		Dim ts1 As VistaDB.DDA.IVistaDBTableSchema = Nothing
+		'Dim t2 As VistaDB.DDA.IVistaDBTable = Nothing
+		Dim ts2 As VistaDB.DDA.IVistaDBTableSchema = Nothing
+		'Dim c As VistaDB.VistaDBColumn
+		Dim c As VistaDB.DDA.IVistaDBColumnAttributes
 
-    If db1 IsNot Nothing Then
-      If db1.IsClosed = False Then db1.Close()
-      db1.Dispose()
-      db1 = Nothing
-    End If
+		Dim tables1 As ArrayList = Nothing
+		Dim tables2 As ArrayList = Nothing
+		'Dim indexes() As String = Nothing
+		Dim tableName As String = ""
+		Dim sIndex As String = ""
+		'Dim indexInfo As VistaDB.RTagInfo
 
+		Dim td As New TableDiff
 
-    If db2 IsNot Nothing Then
-      If db2.IsClosed = False Then db2.Close()
-      db2.Dispose()
-      db2 = Nothing
-    End If
+		'indexInfo.cpKeyExpr = ""
+		'indexInfo.cpForExpr = ""
 
-    Engine.DDA = Nothing
+		'db1 = New VistaDB.VistaDBDatabase(vdbFile1, False, True)
+		db1 = Engine.DDA.OpenDatabase(vdbFile1, VistaDBDatabaseOpenMode.NonexclusiveReadOnly, Nothing)
+		'db2 = New VistaDB.VistaDBDatabase(vdbFile2, False, True)
+		db2 = Engine.DDA.OpenDatabase(vdbFile2, VistaDBDatabaseOpenMode.NonexclusiveReadOnly, Nothing)
 
-    Return differences
-  End Function
+		'If Not db1.Connected Then db1.Connect()
+		'If Not db2.Connected Then db2.Connect()
 
-  Public Shared Function CLangType(ByVal value As Integer) As ICommon.ScriptLanguageEnum
-    'values 0-4 OK (3 & 4 not supported)
-    If value >= 0 And value <= 4 Then
-      Return CType(value, ICommon.ScriptLanguageEnum)
-    Else
-      'invalid range, just return vb.net (or text?)
-      Return ICommon.ScriptLanguageEnum.VbNet
-    End If
 
-  End Function
+		'db1.EnumTables(tables1)
+		tables1 = db1.EnumTables
+		'db2.EnumTables(tables2)
+		tables2 = db2.EnumTables
 
-  'Public Shared Function CLangType(ByVal value As String) As ScriptLanguageEnum
-  '    'not done yet!
 
-  'End Function
+		If Not tables1 Is Nothing Then
+			For Each tableName In tables1
 
-  Public Shared Function GenerateCreateDatabaseScript(ByVal vdbFile As String, ByVal outputLanguage As ICommon.ScriptLanguageEnum) As String
-    'gen up diff object as everything is new
+				't1 = New VistaDB.VistaDBTable(db1, tableName)
+				't1.Open()
+				ts1 = db1.TableSchema(tableName)
 
-    Dim processIndexes As Boolean = True
-    Dim differences As New vdb3.DbDiff
+				'does this table exist in the 2nd db
+				'===========================================================
+				'If db2.IsTableExist(tableName) Then
+				If tables2.Contains(tableName) Then
+					'===========================================================
+					'Checking all fields exist
+					't2 = New VistaDB.VistaDBTable(db2, tableName)
+					't2.Open()
+					ts2 = db2.TableSchema(tableName)
 
-    Dim db1 As DDA.IVistaDBDatabase
-    Dim ts1 As VistaDB.DDA.IVistaDBTableSchema = Nothing
-    Dim c As VistaDB.DDA.IVistaDBColumnAttributes
+					'reset for each table
 
-    Dim tables1 As ArrayList = Nothing
-    Dim tableName As String = ""
-    Dim sIndex As String = ""
+					td = Nothing
 
-    Dim td As New TableDiff
+					'<<------------------  How to enum table columns ??
 
-    db1 = Engine.DDA.OpenDatabase(vdbFile, VistaDBDatabaseOpenMode.NonexclusiveReadOnly, Nothing)
+					For Each c In ts1
+						'check the field exists
+						If Engine.ColumnExists(ts2, c.Name) Then
+							'check data type
+							If c.Type = ts2.Item(c.Name).Type Then
+								'If t1.ColumnType(c.Name) = t2.ColumnType(c.Name) Then
+								'check data length
+								If c.MaxLength <> ts2.Item(c.Name).MaxLength Then
+									'If c.ColumnWidth <> t2.ColumnWidth(c.Name) Then
 
-    tables1 = db1.EnumTables
+									'sizes are different
+									If td Is Nothing Then
+										td = New TableDiff(tableName, ICommon.DiffActionTypeEnum.Alter)
+										differences.Tables.Add(tableName, td)
+									End If
 
-    If Not tables1 Is Nothing Then
-      For Each tableName In tables1
+									td.Fields.Add(c.Name, New FieldDiff(c, ts1, ICommon.DiffActionTypeEnum.Alter))
 
-        ts1 = db1.TableSchema(tableName)
+								End If
+							Else
+								'different data type
+								If td Is Nothing Then
+									td = New TableDiff(tableName, ICommon.DiffActionTypeEnum.Alter)
+									differences.Tables.Add(tableName, td)
+								End If
 
-        '===========================================================
-        '===========================================================
-        'new table
-        td = New TableDiff(tableName, ICommon.DiffActionTypeEnum.Add)
+								td.Fields.Add(c.Name, New FieldDiff(c, ts1, ICommon.DiffActionTypeEnum.Alter))
+							End If
+						Else 'column does not exist
+							If td Is Nothing Then
+								td = New TableDiff(tableName, ICommon.DiffActionTypeEnum.Alter)
+								differences.Tables.Add(tableName, td)
+							End If
 
-        differences.Tables.Add(tableName, td)
+							td.Fields.Add(c.Name, New FieldDiff(c, ts1, ICommon.DiffActionTypeEnum.Add))
+						End If
+					Next
 
-        'adding all fields
-        For Each c In ts1
-          td.Fields.Add(c.Name, New FieldDiff(c, ts1, ICommon.DiffActionTypeEnum.Add))
-          'Next 'field 
-        Next
 
+					'check for fields that may need to be dropped
+					For Each c In ts2
+						If Not Engine.ColumnExists(ts1, c.Name) Then
+							'drop field
+							If td Is Nothing Then
+								td = New TableDiff(tableName, ICommon.DiffActionTypeEnum.Alter)
+								differences.Tables.Add(tableName, td)
+							End If
 
-        'check for identities
-        'check for PK's
-        'check for Indexes
+							td.Fields.Add(c.Name, New FieldDiff(c, ts2, ICommon.DiffActionTypeEnum.Drop))
+						End If
+					Next '
 
-        't1.EnumConstraints ?
-        't1.EnumForeignKeys ?
-        't1.EnumIdentities -> done above
-        't1.EnumIndexes -> done below
-        't1.EnumTriggers ?
+					'===========================================================
+				Else 'table doesn't exist
+					'===========================================================
+					'===========================================================
+					'new table
+					td = New TableDiff(tableName, ICommon.DiffActionTypeEnum.Add)
 
-        If processIndexes Then
+					differences.Tables.Add(tableName, td)
 
-          For Each index As VistaDB.DDA.IVistaDBIndexInformation In ts1.Indexes
+					'adding all fields
+					For Each c In ts1
+						td.Fields.Add(c.Name, New FieldDiff(c, ts1, ICommon.DiffActionTypeEnum.Add))
+						'Next 'field 
+					Next
+				End If 'db2.IsTableExist(tableName)
 
-            'Active doesn't seem to work, leave out for now
-            'If indexInfo.bActive Then
-            If td Is Nothing Then
-              td = New TableDiff(tableName, ICommon.DiffActionTypeEnum.Alter)
-              differences.Tables.Add(tableName, td)
-            End If
+				'check for identities
+				'check for PK's
+				'check for Indexes
 
-            td.Indexs.Add(New IndexDiff(index))
-          Next
-        End If 'processIndexes
+				't1.EnumConstraints ?
+				't1.EnumForeignKeys ?
+				't1.EnumIdentities -> done above
+				't1.EnumIndexes -> done below
+				't1.EnumTriggers ?
 
-      Next 'tableName
-    End If 'tables1 Is Nothing
+				If processIndexes Then
 
-    ''need to close databases
 
-    If db1 IsNot Nothing Then
-      If db1.IsClosed = False Then db1.Close()
-      db1.Dispose()
-      db1 = Nothing
-    End If
 
-    Engine.DDA = Nothing
-
-    Return GenerateScript(differences, outputLanguage, processIndexes)
-  End Function
+					For Each index As VistaDB.DDA.IVistaDBIndexInformation In ts1.Indexes
 
-  'ToDo: write GenerateScript for vdb3
-  Public Shared Function GenerateScript(ByVal differences As DbDiff, ByVal outputLanguage As ICommon.ScriptLanguageEnum, ByVal processIndexes As Boolean) As String
-    If differences Is Nothing Then Return "NONE"
+						'If t1.GetIndex(sIndex, indexInfo.bActive, indexInfo.iOrderIndex, indexInfo.bUnique, indexInfo.bPrimary, indexInfo.bDesc, indexInfo.cpKeyExpr, indexInfo.bFts, indexInfo.bStandardIndex, indexInfo.cpForExpr) Then
 
-    Dim lang As ICommon.IScripter = Nothing
+						'Active doesn't seem to work, leave out for now
+						'If indexInfo.bActive Then
+						If td Is Nothing Then
+							td = New TableDiff(tableName, ICommon.DiffActionTypeEnum.Alter)
+							differences.Tables.Add(tableName, td)
+						End If
 
-    Select Case outputLanguage
-      Case ICommon.ScriptLanguageEnum.Text
-        lang = New TextScripter
-      Case ICommon.ScriptLanguageEnum.VbNet
-        'Return "VB.NET is undergoin an update..."
-        lang = New VBScripter
-      Case ICommon.ScriptLanguageEnum.CSharp
-        'Return "C# is still under development"
-        lang = New CSharpScripter
-      Case ICommon.ScriptLanguageEnum.Delphi
-        Return "Delphi is not supported yet, please contact support for more information"
-    End Select
+						td.Indexs.Add(New IndexDiff(index))
+						'Dim idx As New IndexDiff(index)
+						'With idx
+						'    .Name = sIndex
+						'    'Trace.WriteLine("Index: " & .Name & " = " & indexInfo.cpForExpr)
+						'    .KeyExpr = index.KeyExpression ' indexInfo.cpKeyExpr
+						'    .Descending = False ' indexInfo.bDesc
 
-    'If lang IsNot Nothing Then
-    '    Return "OUTPUT=" & lang.LanguageName & Environment.NewLine & Environment.NewLine & lang.GenerateScript(differences)
-    'Else
-    '    Return "Language type not yet supported"
-    'End If
+						'    If index.Primary Then
+						'        .IndexType = VDBIndexOption.Primary
+						'    ElseIf indexInfo.bUnique Then
+						'        .IndexType = VDBIndexOption.Unique
+						'    ElseIf indexInfo.bStandardIndex Then
+						'        .IndexType = VDBIndexOption.Standard
+						'    ElseIf indexInfo.bFts Then
+						'        'not sure what it is but don't think its every used.
+						'        .IndexType = VDBIndexOption.FTS
+						'    Else
+						'        'normal? what is that?
+						'        .IndexType = VDBIndexOption.Standard
+						'    End If
+						'End With
+						''.Append(indexInfo.ulLocaleId)
+						'td.Indexs.Add(idx)
+						'End If
+						'End If
 
-    'this is how I want it to work
-    'there should be NO language specific code here!
-    If differences Is Nothing Then Return lang.CComment("NONE")
-    If differences.HasChanges = False Then Return lang.CComment("NONE")
+					Next
 
-    Dim sb As New System.Text.StringBuilder
+				End If 'processIndexes
 
-    sb.Append(lang.ScriptHeader)
 
-    For Each t As TableDiff In differences.Tables.Values
-      Select Case t.DiffAction
-        Case ICommon.DiffActionTypeEnum.Add
-          sb.AppendLine(lang.CComment("Table: " & t.TableName))
-          sb.AppendLine(lang.CIfTableExists(t.TableName, False))
+			Next 'tableName
+		End If 'tables1 Is Nothing
 
-          sb.AppendLine(lang.CNewTable(t.TableName))
-          sb.AppendLine()
-          'sb.AppendLine(lang.CStatement("t.CreateNew()"))
-          'sb.AppendLine()
-          sb.AppendLine(lang.CComment("Fields")) 'should only ever be adding columns
+		''need to close databases
 
-          For Each f As FieldDiff In t.Fields.Values
-            If f.DiffAction = ICommon.DiffActionTypeEnum.Add Then
-              sb.AppendLine(lang.CCreateColumn(f.Name, "VistaDB.VistaDBType." & f.DataType.ToString, f.Width, f.Decimals, f.Required))
-              sb.AppendLine()
-            Else
-              sb.AppendLine(lang.CComment("# Invalid action for column [" & f.Name & "]"))
-            End If 'all other actions should be INVALID in this context!
-          Next
+		If db1 IsNot Nothing Then
+			If db1.IsClosed = False Then db1.Close()
+			db1.Dispose()
+			db1 = Nothing
+		End If
 
-          sb.AppendLine()
-          sb.AppendLine(lang.CStatement("t = db.CreateTable(ts, False, False)"))
-          sb.AppendLine()
-          'PKs, Indexes, etc...
 
-          'sb.AppendLine(lang.COpenTable)
-          'sb.AppendLine()
+		If db2 IsNot Nothing Then
+			If db2.IsClosed = False Then db2.Close()
+			db2.Dispose()
+			db2 = Nothing
+		End If
 
-          For Each f As FieldDiff In t.Fields.Values
+		Engine.DDA = Nothing
 
-            If f.Identity Then
-              sb.AppendLine(lang.CSetIdentity(f.Name, f.IdentityValue, f.IdentityStep))
-            ElseIf f.DefaultValue <> "" Then
-              'identities shound't have defaults
-              'need to determine if the default value is used in updates some how
-              'sb.AppendLine("t.SetDefaultValue(""" & f.Name & """, """ & f.DefaultValue & """, False)")
-              sb.AppendLine(lang.CSetDefault(f.Name, f.DefaultValue, f.UseDefaultInUpdate))
+		Return differences
+	End Function
 
-            End If
-          Next
+	Public Shared Function CLangType(ByVal value As Integer) As ICommon.ScriptLanguageEnum
+		'values 0-4 OK (3 & 4 not supported)
+		If value >= 0 And value <= 4 Then
+			Return CType(value, ICommon.ScriptLanguageEnum)
+		Else
+			'invalid range, just return vb.net (or text?)
+			Return ICommon.ScriptLanguageEnum.VbNet
+		End If
 
-          'Indexes
-          If processIndexes Then
-            For Each idx As IndexDiff In t.Indexs
-              sb.AppendLine(lang.CIsIndexExists(idx.Name))
-              sb.AppendLine(lang.CCreateIndex(idx))
-              'sb.AppendLine(lang.CCreateIndex(idx.Name, idx.KeyExpr, "VistaDB.VDBIndexOption." & idx.IndexType.ToString, idx.Descending, 0))
-              'sb.AppendLine(lang.CComment("Index " & idx.Name & ", code coming soon"))
-              sb.AppendLine(lang.CEndIf)
+	End Function
 
-              'If idx.Primary Then
-              '  sb.AppendLine("t.CreateIndex(""Primary"", """ & idx.KeyExpr & """, True, True)")
-              'Else
-              '  sb.AppendLine("t.CreateIndex(""" & idx.Name & """, False, " & idx.Unique.ToString & ")")
-              'End If
-            Next
+	'Public Shared Function CLangType(ByVal value As String) As ScriptLanguageEnum
+	'    'not done yet!
 
-            If t.Indexs.Count > 0 Then
-              sb.AppendLine(lang.CStatement("db.AlterTable(""" & t.TableName & """, ts)"))
-            End If
-          End If
+	'End Function
 
+	Public Shared Function GenerateCreateDatabaseScript(ByVal vdbFile As String, ByVal outputLanguage As ICommon.ScriptLanguageEnum) As String
+		'gen up diff object as everything is new
 
-          sb.AppendLine()
-          sb.AppendLine(lang.CCloseTable)
-          sb.AppendLine(lang.CSetNothing("ts"))
-          sb.AppendLine(lang.CSetNothing("t"))
-          sb.AppendLine(lang.CEndIf)
-          sb.AppendLine()
+		Dim processIndexes As Boolean = True
+		Dim differences As New vdb3.DbDiff
 
+		Dim db1 As DDA.IVistaDBDatabase
+		Dim ts1 As VistaDB.DDA.IVistaDBTableSchema = Nothing
+		Dim c As VistaDB.DDA.IVistaDBColumnAttributes
 
-        Case ICommon.DiffActionTypeEnum.Alter
-          If t.HasChanges Then
-            sb.AppendLine(lang.CComment("Table: " & t.TableName))
-            sb.AppendLine(lang.CIfTableExists(t.TableName, True))
+		Dim tables1 As ArrayList = Nothing
+		Dim tableName As String = ""
+		Dim sIndex As String = ""
 
-            'sb.AppendLine(lang.CNewTable(t.TableName))
-            sb.AppendLine(lang.COpenTableSchema(t.TableName))
+		Dim td As New TableDiff
 
+		db1 = Engine.DDA.OpenDatabase(vdbFile, VistaDBDatabaseOpenMode.NonexclusiveReadOnly, Nothing)
 
-            If t.HasFieldChanges Then 'as may only contain index changes
-              'sb.AppendLine("t.AlterTable()") 'should be same in all languages
+		tables1 = db1.EnumTables
 
-              'columns.. should be either alter,add or drop
+		If Not tables1 Is Nothing Then
+			For Each tableName In tables1
 
-              For Each f As FieldDiff In t.Fields.Values
-                Select Case f.DiffAction
-                  Case ICommon.DiffActionTypeEnum.Add
-                    sb.AppendLine(lang.CCreateColumn(f.Name, "VistaDB.VistaDBType." & f.DataType.ToString, f.Width, f.Decimals, f.Required))
+				ts1 = db1.TableSchema(tableName)
 
-                  Case ICommon.DiffActionTypeEnum.Alter
-                    sb.AppendLine(lang.CAlterColumn(f.Name, "VistaDB.VistaDBType." & f.DataType.ToString, f.Width, f.Decimals, f.Required))
+				'===========================================================
+				'===========================================================
+				'new table
+				td = New TableDiff(tableName, ICommon.DiffActionTypeEnum.Add)
 
-                  Case ICommon.DiffActionTypeEnum.Drop
-                    '??
-                    sb.AppendLine(lang.CComment("Drop Column " & f.Name))
-                    sb.AppendLine(lang.CComment(lang.CStatement("ts.DropColumn(""" & f.Name & """)")))
-                End Select
+				differences.Tables.Add(tableName, td)
 
-              Next
+				'adding all fields
+				For Each c In ts1
+					td.Fields.Add(c.Name, New FieldDiff(c, ts1, ICommon.DiffActionTypeEnum.Add))
+					'Next 'field 
+				Next
 
-              sb.AppendLine(lang.CStatement("db.AlterTable(""" & t.TableName & """, ts)"))
-              'sb.AppendLine(lang.CStatement("t.AlterTableFinalize(True)")) 'should be same in all languages
-            End If
 
-            sb.AppendLine()
+				'check for identities
+				'check for PK's
+				'check for Indexes
 
-            'Indexes
-            If t.HasIndexChanges Then
-              For Each idx As IndexDiff In t.Indexs
-                sb.AppendLine(lang.CIsIndexExists(idx.Name))
-                sb.AppendLine(lang.CCreateIndex(idx))
-                sb.AppendLine(lang.CEndIf)
-              Next
-              sb.AppendLine(lang.CStatement("db.AlterTable(""" & t.TableName & """, ts)"))
-            End If
+				't1.EnumConstraints ?
+				't1.EnumForeignKeys ?
+				't1.EnumIdentities -> done above
+				't1.EnumIndexes -> done below
+				't1.EnumTriggers ?
 
+				If processIndexes Then
 
-            sb.AppendLine()
-            'sb.AppendLine(lang.CCloseTable)
-            sb.AppendLine(lang.CSetNothing("ts"))
-            sb.AppendLine(lang.CEndIf)
-            sb.AppendLine()
-          End If
+					For Each index As VistaDB.DDA.IVistaDBIndexInformation In ts1.Indexes
 
+						'Active doesn't seem to work, leave out for now
+						'If indexInfo.bActive Then
+						If td Is Nothing Then
+							td = New TableDiff(tableName, ICommon.DiffActionTypeEnum.Alter)
+							differences.Tables.Add(tableName, td)
+						End If
 
-        Case ICommon.DiffActionTypeEnum.Drop
-          sb.AppendLine(lang.CComment("Drop Table " & t.TableName))
-          sb.AppendLine(lang.CComment(lang.CDropTable(t.TableName)))
-        Case ICommon.DiffActionTypeEnum.None
-          'fields only
-          'sb.Append("'? Table [")
-          'sb.Append(t.TableName)
-          'sb.Append("]")
-          'sb.Append(Environment.NewLine)
-      End Select
+						td.Indexs.Add(New IndexDiff(index))
+					Next
+				End If 'processIndexes
 
-      sb.AppendLine()
+			Next 'tableName
+		End If 'tables1 Is Nothing
 
-    Next 'table
+		''need to close databases
 
-    sb.Append(lang.ScriptFooter)
+		If db1 IsNot Nothing Then
+			If db1.IsClosed = False Then db1.Close()
+			db1.Dispose()
+			db1 = Nothing
+		End If
 
-    'todo: adding in section for required functions
-    'this is working, just dont think its needed (yet)
-    sb.AppendLine()
-    sb.AppendLine(lang.CComment("Please create a class from the below code (*** its functions are used in the above generated code update)"))
-    sb.AppendLine()
-    sb.Append(lang.ScriptRequiredFunctions)
+		Engine.DDA = Nothing
 
-    'end
-    Return sb.ToString
+		Return GenerateScript(differences, outputLanguage, processIndexes)
+	End Function
 
-  End Function
+	'ToDo: write GenerateScript for vdb3
+	Public Shared Function GenerateScript(ByVal differences As DbDiff, ByVal outputLanguage As ICommon.ScriptLanguageEnum, ByVal processIndexes As Boolean) As String
+		If differences Is Nothing Then Return "NONE"
 
-  Public Shared Function PackDatabase(ByVal dataFile As String) As Boolean
-    'no error handling, calling code wants to display error message
-    If dataFile = "" Then
-      'DevExpress.XtraEditors.XtraMessageBox.Show("Please enter a Database First", "Pack Database", MessageBoxButtons.OK, MessageBoxIcon.Information)
-      Return False
-    End If
+		Dim lang As ICommon.IScripter = Nothing
 
-    If IO.File.Exists(dataFile) Then
+		Select Case outputLanguage
+			Case ICommon.ScriptLanguageEnum.Text
+				lang = New TextScripter
+			Case ICommon.ScriptLanguageEnum.VbNet
+				'Return "VB.NET is undergoin an update..."
+				lang = New VBScripter
+			Case ICommon.ScriptLanguageEnum.CSharp
+				'Return "C# is still under development"
+				lang = New CSharpScripter
+			Case ICommon.ScriptLanguageEnum.Delphi
+				Return "Delphi is not supported yet, please contact support for more information"
+		End Select
 
-      Engine.DDA.PackDatabase(dataFile, Nothing, True, Nothing)
+		'If lang IsNot Nothing Then
+		'    Return "OUTPUT=" & lang.LanguageName & Environment.NewLine & Environment.NewLine & lang.GenerateScript(differences)
+		'Else
+		'    Return "Language type not yet supported"
+		'End If
 
-      Return True
-    Else
-      Return False 'file not found
-    End If
+		'this is how I want it to work
+		'there should be NO language specific code here!
+		If differences Is Nothing Then Return lang.CComment("NONE")
+		If differences.HasChanges = False Then Return lang.CComment("NONE")
 
-  End Function
+		Dim sb As New System.Text.StringBuilder
 
-  'make this Public available
-  Public Shared Function ColumnExists(ByVal t As VistaDB.DDA.IVistaDBTableSchema, ByVal columnName As String) As Boolean
-    Return Engine.ColumnExists(t, columnName)
-  End Function
+		sb.Append(lang.ScriptHeader)
 
-  Public Shared Function ListTables(ByVal dbFile As String) As ArrayList
-    Dim ar As New ArrayList
+		For Each t As TableDiff In differences.Tables.Values
+			Select Case t.DiffAction
+				Case ICommon.DiffActionTypeEnum.Add
+					sb.AppendLine(lang.CComment("Table: " & t.TableName))
+					sb.AppendLine(lang.CIfTableExists(t.TableName, False))
 
-    If IO.File.Exists(dbFile) Then
-      Dim db As DDA.IVistaDBDatabase = Nothing
+					sb.AppendLine(lang.CNewTable(t.TableName))
+					sb.AppendLine()
+					'sb.AppendLine(lang.CStatement("t.CreateNew()"))
+					'sb.AppendLine()
+					sb.AppendLine(lang.CComment("Fields")) 'should only ever be adding columns
 
-      Try
-        db = Engine.DDA.OpenDatabase(dbFile, VistaDBDatabaseOpenMode.NonexclusiveReadOnly, Nothing)
+					For Each f As FieldDiff In t.Fields.Values
+						If f.DiffAction = ICommon.DiffActionTypeEnum.Add Then
+							sb.AppendLine(lang.CCreateColumn(f.Name, "VistaDB.VistaDBType." & f.DataType.ToString, f.Width, f.Decimals, f.Required))
+							sb.AppendLine()
+						Else
+							sb.AppendLine(lang.CComment("# Invalid action for column [" & f.Name & "]"))
+						End If 'all other actions should be INVALID in this context!
+					Next
 
-        ar = db.EnumTables
+					sb.AppendLine()
+					sb.AppendLine(lang.CStatement("t = db.CreateTable(ts, False, False)"))
+					sb.AppendLine()
+					'PKs, Indexes, etc...
 
-        'Catch ex As Exception
-      Finally
+					'sb.AppendLine(lang.COpenTable)
+					'sb.AppendLine()
 
-        If db IsNot Nothing Then
-          If db.IsClosed = False Then db.Close()
-          db.Dispose()
-          db = Nothing
-        End If
-      End Try
+					For Each f As FieldDiff In t.Fields.Values
 
-    End If
-    Return ar
-  End Function
+						If f.Identity Then
+							sb.AppendLine(lang.CSetIdentity(f.Name, f.IdentityValue, f.IdentityStep))
+						ElseIf f.DefaultValue <> "" Then
+							'identities shound't have defaults
+							'need to determine if the default value is used in updates some how
+							'sb.AppendLine("t.SetDefaultValue(""" & f.Name & """, """ & f.DefaultValue & """, False)")
+							sb.AppendLine(lang.CSetDefault(f.Name, f.DefaultValue, f.UseDefaultInUpdate))
 
+						End If
+					Next
 
-  Public Shared Function ExportData(ByVal dbFile As String, ByVal exportTarget As String, ByVal schemaOnly As Boolean, ByVal tablesToExport As ArrayList) As Boolean
+					'Indexes
+					If processIndexes Then
+						For Each idx As IndexDiff In t.Indexs
+							sb.AppendLine(lang.CIsIndexExists(idx.Name))
+							sb.AppendLine(lang.CCreateIndex(idx))
+							'sb.AppendLine(lang.CCreateIndex(idx.Name, idx.KeyExpr, "VistaDB.VDBIndexOption." & idx.IndexType.ToString, idx.Descending, 0))
+							'sb.AppendLine(lang.CComment("Index " & idx.Name & ", code coming soon"))
+							sb.AppendLine(lang.CEndIf)
 
-    Dim blnResult As Boolean = False
-    Dim db As DDA.IVistaDBDatabase = Nothing
-    Dim tables As ArrayList
+							'If idx.Primary Then
+							'  sb.AppendLine("t.CreateIndex(""Primary"", """ & idx.KeyExpr & """, True, True)")
+							'Else
+							'  sb.AppendLine("t.CreateIndex(""" & idx.Name & """, False, " & idx.Unique.ToString & ")")
+							'End If
+						Next
 
-    Try
-      db = Engine.DDA.OpenDatabase(dbFile, VistaDBDatabaseOpenMode.NonexclusiveReadOnly, Nothing)
+						If t.Indexs.Count > 0 Then
+							sb.AppendLine(lang.CStatement("db.AlterTable(""" & t.TableName & """, ts)"))
+						End If
+					End If
 
-      'now export the data
 
-      db.ClearXmlTransferList()
+					sb.AppendLine()
+					sb.AppendLine(lang.CCloseTable)
+					sb.AppendLine(lang.CSetNothing("ts"))
+					sb.AppendLine(lang.CSetNothing("t"))
+					sb.AppendLine(lang.CEndIf)
+					sb.AppendLine()
 
-      If tablesToExport IsNot Nothing Then
-        'selection
-        For Each s As String In tablesToExport
-          db.AddToXmlTransferList(s)
-        Next
-      Else
-        'All tables
-        tables = db.EnumTables
 
-        For Each table As String In tables
-          db.AddToXmlTransferList(table)
-        Next
-      End If
+				Case ICommon.DiffActionTypeEnum.Alter
+					If t.HasChanges Then
+						sb.AppendLine(lang.CComment("Table: " & t.TableName))
+						sb.AppendLine(lang.CIfTableExists(t.TableName, True))
 
-      If schemaOnly Then
-        db.ExportXml(exportTarget, VistaDB.DDA.VistaDBXmlWriteMode.SchemaOnly)
-      Else
-        db.ExportXml(exportTarget, VistaDB.DDA.VistaDBXmlWriteMode.All)
-      End If
+						'sb.AppendLine(lang.CNewTable(t.TableName))
+						sb.AppendLine(lang.COpenTableSchema(t.TableName))
 
-      blnResult = True
 
-    Catch ex As Exception
-      blnResult = False
-      'DevExpress.XtraEditors.XtraMessageBox.Show(ex.Message, STR_Export, MessageBoxButtons.OK, MessageBoxIcon.Error)
-    Finally
-      If db IsNot Nothing Then
-        If db.IsClosed = False Then db.Close()
-        db.Dispose()
-        db = Nothing
-      End If
-    End Try
+						If t.HasFieldChanges Then 'as may only contain index changes
+							'sb.AppendLine("t.AlterTable()") 'should be same in all languages
 
-    Return blnResult
-  End Function
+							'columns.. should be either alter,add or drop
+
+							For Each f As FieldDiff In t.Fields.Values
+								Select Case f.DiffAction
+									Case ICommon.DiffActionTypeEnum.Add
+										sb.AppendLine(lang.CCreateColumn(f.Name, "VistaDB.VistaDBType." & f.DataType.ToString, f.Width, f.Decimals, f.Required))
+
+									Case ICommon.DiffActionTypeEnum.Alter
+										sb.AppendLine(lang.CAlterColumn(f.Name, "VistaDB.VistaDBType." & f.DataType.ToString, f.Width, f.Decimals, f.Required))
+
+									Case ICommon.DiffActionTypeEnum.Drop
+										'??
+										sb.AppendLine(lang.CComment("Drop Column " & f.Name))
+										sb.AppendLine(lang.CComment(lang.CStatement("ts.DropColumn(""" & f.Name & """)")))
+								End Select
+
+							Next
+
+							sb.AppendLine(lang.CStatement("db.AlterTable(""" & t.TableName & """, ts)"))
+							'sb.AppendLine(lang.CStatement("t.AlterTableFinalize(True)")) 'should be same in all languages
+						End If
+
+						sb.AppendLine()
+
+						'Indexes
+						If t.HasIndexChanges Then
+							For Each idx As IndexDiff In t.Indexs
+								sb.AppendLine(lang.CIsIndexExists(idx.Name))
+								sb.AppendLine(lang.CCreateIndex(idx))
+								sb.AppendLine(lang.CEndIf)
+							Next
+							sb.AppendLine(lang.CStatement("db.AlterTable(""" & t.TableName & """, ts)"))
+						End If
+
+
+						sb.AppendLine()
+						'sb.AppendLine(lang.CCloseTable)
+						sb.AppendLine(lang.CSetNothing("ts"))
+						sb.AppendLine(lang.CEndIf)
+						sb.AppendLine()
+					End If
+
+
+				Case ICommon.DiffActionTypeEnum.Drop
+					sb.AppendLine(lang.CComment("Drop Table " & t.TableName))
+					sb.AppendLine(lang.CComment(lang.CDropTable(t.TableName)))
+				Case ICommon.DiffActionTypeEnum.None
+					'fields only
+					'sb.Append("'? Table [")
+					'sb.Append(t.TableName)
+					'sb.Append("]")
+					'sb.Append(Environment.NewLine)
+			End Select
+
+			sb.AppendLine()
+
+		Next 'table
+
+		sb.Append(lang.ScriptFooter)
+
+		'todo: adding in section for required functions
+		'this is working, just dont think its needed (yet)
+		sb.AppendLine()
+		sb.AppendLine(lang.CComment("Please create a class from the below code (*** its functions are used in the above generated code update)"))
+		sb.AppendLine()
+		sb.Append(lang.ScriptRequiredFunctions)
+
+		'end
+		Return sb.ToString
+
+	End Function
+
+	Public Shared Function PackDatabase(ByVal dataFile As String) As Boolean
+		'no error handling, calling code wants to display error message
+		If dataFile = "" Then
+			'DevExpress.XtraEditors.XtraMessageBox.Show("Please enter a Database First", "Pack Database", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			Return False
+		End If
+
+		If IO.File.Exists(dataFile) Then
+
+			Engine.DDA.PackDatabase(dataFile, Nothing, True, Nothing)
+
+			Return True
+		Else
+			Return False 'file not found
+		End If
+
+	End Function
+
+	'make this Public available
+	Public Shared Function ColumnExists(ByVal t As VistaDB.DDA.IVistaDBTableSchema, ByVal columnName As String) As Boolean
+		Return Engine.ColumnExists(t, columnName)
+	End Function
+
+	Public Shared Function ListTables(ByVal dbFile As String) As ArrayList
+		Dim ar As New ArrayList
+
+		If IO.File.Exists(dbFile) Then
+			Dim db As DDA.IVistaDBDatabase = Nothing
+
+			Try
+				db = Engine.DDA.OpenDatabase(dbFile, VistaDBDatabaseOpenMode.NonexclusiveReadOnly, Nothing)
+
+				ar = db.EnumTables
+
+				'Catch ex As Exception
+			Finally
+
+				If db IsNot Nothing Then
+					If db.IsClosed = False Then db.Close()
+					db.Dispose()
+					db = Nothing
+				End If
+			End Try
+
+		End If
+		Return ar
+	End Function
+
+
+	Public Shared Function ExportData(ByVal dbFile As String, ByVal exportTarget As String, ByVal schemaOnly As Boolean, ByVal tablesToExport As ArrayList) As Boolean
+
+		Dim blnResult As Boolean = False
+		Dim db As DDA.IVistaDBDatabase = Nothing
+		Dim tables As ArrayList
+
+		Try
+			db = Engine.DDA.OpenDatabase(dbFile, VistaDBDatabaseOpenMode.NonexclusiveReadOnly, Nothing)
+
+			'now export the data
+
+			db.ClearXmlTransferList()
+
+			If tablesToExport IsNot Nothing Then
+				'selection
+				For Each s As String In tablesToExport
+					db.AddToXmlTransferList(s)
+				Next
+			Else
+				'All tables
+				tables = db.EnumTables
+
+				For Each table As String In tables
+					db.AddToXmlTransferList(table)
+				Next
+			End If
+
+			If schemaOnly Then
+				db.ExportXml(exportTarget, VistaDB.DDA.VistaDBXmlWriteMode.SchemaOnly)
+			Else
+				db.ExportXml(exportTarget, VistaDB.DDA.VistaDBXmlWriteMode.All)
+			End If
+
+			blnResult = True
+
+		Catch ex As Exception
+			blnResult = False
+			'DevExpress.XtraEditors.XtraMessageBox.Show(ex.Message, STR_Export, MessageBoxButtons.OK, MessageBoxIcon.Error)
+		Finally
+			If db IsNot Nothing Then
+				If db.IsClosed = False Then db.Close()
+				db.Dispose()
+				db = Nothing
+			End If
+		End Try
+
+		Return blnResult
+	End Function
 
 
 
